@@ -47,6 +47,13 @@ class Posts extends Component {
         console.log('Context: ', context)
         console.log('State: ', context.store.getState())
         this.store = context.store;
+        this.unsubscribe = this.store.subscribe(() => this.forceUpdate())
+    }
+
+    // 移除
+    componentWillUnMount(){
+        console.log("will un mount")
+        this.unsubscribe();
     }
 
     onClickDeleteButton = (id) => {
