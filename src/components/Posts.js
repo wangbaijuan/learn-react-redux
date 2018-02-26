@@ -11,7 +11,7 @@ const PostItem = ({entity, onClickDeleteButton }) => {
     return (
         <div>
             <h3>{entity.title}</h3>
-            <button onClick={ onClickDeleteButton }>DELETE</button>
+            <button onClick={ () => onClickDeleteButton(entity.id) }>DELETE</button>
         </div>
 
     )
@@ -23,7 +23,7 @@ const PostList = ({entities, onClickDeleteButton }) => {
         <PostItem
             key={ item.id }
             entity = { item }
-            onClickDeleteButton = { () => onClickDeleteButton(item.id) }
+            onClickDeleteButton = { onClickDeleteButton }
         />
     );
 
