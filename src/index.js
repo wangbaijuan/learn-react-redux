@@ -56,13 +56,13 @@ const PlayerAPI = {
 }
 
 // <Roster>用来渲染所有以/roster开始的全部路由。
-const Roster = () => (
+const Roster = ({match}) => (
     <div>
         <h2>This is a roster page!</h2>
         <Switch>
-            <Route exact path='/roster' component={RosterList}/>
+            <Route exact path={`${match.url}`} component={RosterList}/>
             {/*会获取到一个对象：{ number: '6' }*/}
-            <Route path='/roster/:number' component={Player}/>
+            <Route path={`${match.url}/:number`} component={Player}/>
         </Switch>
     </div>
 )
@@ -99,7 +99,7 @@ const RosterList = () => {
 
 // <Player>组件可以使用props.match.params对象来确定需要被渲染的运动员的数据。
 const Player = (props) => {
-
+    console.log(props.match) //{path: "/roster/:number", url: "/roster/1", isExact: true, params: {…}}
     console.log(props.match.params);//object: {number: "1"}
     console.log(JSON.stringify(props.match.params)); //string:{"number":"1"}
     let player = PlayerAPI.get(parseInt(props.match.params.number, 10));
