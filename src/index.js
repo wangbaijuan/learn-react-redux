@@ -32,9 +32,26 @@ const Main = () => (
             */}
             <Route path='/roster' component={Roster}/>
             <Route path='/schedule' component={Schedule}/>
+            {/*
+            A <Switch> renders the first child <Route> that matches.
+            A <Route> with no path always matches.
+            */}
+            <Route component={NoMatch} />
         </Switch>
     </main>
 )
+
+const NoMatch = ({location}) => {
+
+    console.log(location); //{pathname: "/rosters", search: "", hash: "", state: undefined}
+    return (
+        <div>
+            <h3>
+                No match for <code>{location.pathname}</code>
+            </h3>
+        </div>
+    );
+}
 
 const Home = () => (
     <h2>Home exact / </h2>
@@ -99,6 +116,7 @@ const RosterList = () => {
 
 // <Player>组件可以使用props.match.params对象来确定需要被渲染的运动员的数据。
 const Player = (props) => {
+    console.log(props)
     console.log(props.match) //{path: "/roster/:number", url: "/roster/1", isExact: true, params: {…}}
     console.log(props.match.params);//object: {number: "1"}
     console.log(JSON.stringify(props.match.params)); //string:{"number":"1"}
